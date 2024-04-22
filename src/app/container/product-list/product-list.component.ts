@@ -1,7 +1,8 @@
 import { NgFor, NgIf, NgStyle } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ProductComponent } from './product/product.component';
 import { FilterComponent } from './filter/filter.component';
+import { Product } from '../../Models/Product';
 
 @Component({
   selector: 'product-list',
@@ -11,6 +12,9 @@ import { FilterComponent } from './filter/filter.component';
   styleUrl: './product-list.component.css',
 })
 export class ProductListComponent {
+  @Input()
+  searchedKeyword: string;
+  selectedProduct: Product;
   products = [
     {
       id: 1,
@@ -607,4 +611,13 @@ export class ProductListComponent {
   totalProductInStock = this.products.filter((p) => p.is_in_inventory).length;
   totalProductOutOfStock = this.products.filter((p) => !p.is_in_inventory)
     .length;
+  selectedFilterRadioButton: string = 'all';
+
+  onFilterChange(value: string) {
+    this.selectedFilterRadioButton = value;
+  }
+  setSelectedProduct(product: Product) {
+    this.selectedProduct = product;
+    console.log('selctedProduct', this.selectedProduct);
+  }
 }

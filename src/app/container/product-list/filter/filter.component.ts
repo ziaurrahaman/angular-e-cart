@@ -1,4 +1,4 @@
-import { Component, Input, EventEmitter } from '@angular/core';
+import { Component, Input, EventEmitter, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -18,12 +18,13 @@ export class FilterComponent {
   @Input()
   outOfStock: number = 0;
 
-  selectedFilterRadioButton: string | boolean = 'all';
+  selectedFilterRadioButton: string = 'all';
 
+  @Output()
   selectedFilterRadioButtonChange: EventEmitter<string> =
     new EventEmitter<string>();
 
   onSelectedFilterRadioButtonChange() {
-    this.selectedFilterRadioButtonChange.emit();
+    this.selectedFilterRadioButtonChange.emit(this.selectedFilterRadioButton);
   }
 }

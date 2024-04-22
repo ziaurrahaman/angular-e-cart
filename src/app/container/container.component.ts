@@ -1,17 +1,34 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { SearchComponent } from './search/search.component';
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { ProductListComponent } from './product-list/product-list.component';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { FeaturedBrandsComponent } from './featured-brands/featured-brands.component';
 
 @Component({
   selector: 'container',
   standalone: true,
-  imports: [SearchComponent, NgFor, ProductListComponent],
+  imports: [
+    SearchComponent,
+    NgFor,
+    ProductListComponent,
+    ProductDetailComponent,
+    NgIf,
+    FeaturedBrandsComponent,
+  ],
   templateUrl: './container.component.html',
   styleUrl: './container.component.css',
 })
 export class ContainerComponent {
   listOfString: string[] = ['Shojol', 'Hrittik', 'Adnan', 'Hasib'];
+  searchText: string = '';
+  setSearchText(evnet: string) {
+    console.log('searchedKeywordIs', evnet);
+    this.searchText = evnet;
+  }
+
+  @ViewChild(ProductListComponent)
+  productListComponent: ProductListComponent;
   // addToCart = 0;
   // name = 'Jhon Smith';
   // product = {
